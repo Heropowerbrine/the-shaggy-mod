@@ -45,6 +45,7 @@ import openfl.media.Video;
 import Achievements;
 import openfl.utils.Assets as OpenFlAssets;
 import ui.Hitbox;
+import flash.system.System;
 
 using StringTools;
 
@@ -256,6 +257,8 @@ class PlayState extends MusicBeatState
 	//cum
 	var camLerp:Float = 1;
 	var bgDim:FlxSprite;
+	var fullDim = false;
+	var noticeTime = 0;
 	var dimGo:Bool = false;
 
 	//cutscenxs
@@ -304,6 +307,12 @@ class PlayState extends MusicBeatState
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
+		
+		if (SONG.song == 'Talladega' && FlxG.save.data.p_partsGiven < 4)
+		{
+			fullDim = true;
+			isStoryMode = false;
+		}
 
 		mania = SONG.mania;
 
@@ -2418,6 +2427,22 @@ class PlayState extends MusicBeatState
 		{
 			if (bgDim.alpha > 0) bgDim.alpha -= 0.01;
 		}
+                if (fullDim)
+		{
+			bgDim.alpha = 1;
+
+			switch (noticeTime)
+			{
+				case 0:
+					var no = new Alphabet(0, 200, 'You can unlock this in-game.', true, false);
+					no.cameras = [camHUD];
+					no.screenCenter();
+					add(no);
+				case 300:
+					System.exit(0);
+			}
+			noticeTime ++;
+		}
 
 		if(!inCutscene) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4, 0, 1) * camLerp;
@@ -2634,7 +2659,7 @@ class PlayState extends MusicBeatState
 		if(ratingString == '?') {
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingString;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingString + ' (' + Math.floor(ratingPercent * 100) + '%)';
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingString + ' (' + Math.floor(ratingPercent * 10000) / 100) + '%)';
 		}
 
 		if(cpuControlled) {
