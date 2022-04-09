@@ -7,6 +7,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.events.Event;
 import vlc.VlcBitmap;
+import extension.videoview.VideoView;
+import android.AndroidTools;
 
 // THIS IS FOR TESTING
 // DONT STEAL MY CODE >:(
