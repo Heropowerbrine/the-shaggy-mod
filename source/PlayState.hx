@@ -4590,6 +4590,20 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
+		switch (curSong.toLowerCase()) {
+			case 'talladega':
+				if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 3 == 0)
+					{
+						FlxG.camera.zoom += 0.015;
+						camHUD.zoom += 0.03;
+					}
+			default:
+				if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
+					{
+						FlxG.camera.zoom += 0.015;
+						camHUD.zoom += 0.03;
+					}
+		 }
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
 		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
 
