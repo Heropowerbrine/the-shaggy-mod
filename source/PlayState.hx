@@ -1065,6 +1065,11 @@ class PlayState extends MusicBeatState
 						maskCollGroup.add(maskObj);
 					}
 					startCountdown();
+					case 'talladega':
+					if (FlxG.save.data.ending[2])
+					{
+						startCountdown();
+					}
 				default:
 					startCountdown();
 			}
