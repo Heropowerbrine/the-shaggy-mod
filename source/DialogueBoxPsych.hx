@@ -161,7 +161,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		}
 		#end
 
-		if (FlxG.keys.justPressed.ANY #if android || justTouched #end {
+		if (FlxG.keys.justPressed.ANY #if android || justTouched #end) {
 				if(!daText.finishedText) {
 					if(daText != null) {
 						daText.killTheTimer();
